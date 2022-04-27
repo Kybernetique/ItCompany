@@ -50,6 +50,22 @@ public class Developer {
         this.lastName = lastName;
     }
 
+    public Developer(String firstName, String lastName, List<Project> worksOnProjects) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.worksOnProjects = worksOnProjects;
+    }
+
+    public void addProject(Project project) {
+        if(this.worksOnProjects == null)
+            this.worksOnProjects = new ArrayList<>();
+
+        if (!worksOnProjects.contains(project)) {
+            worksOnProjects.add(project);
+            project.setDeveloper(this);
+        }
+    }
+
     public Long getId() {
         return id;
     }
@@ -69,6 +85,28 @@ public class Developer {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+        if (!company.getDevelopers().contains(this)) {
+            company.setDeveloper(this);
+        }
+    }
+
+    public void setProject(Project project) {
+        if (this.worksOnProjects == null)
+            this.worksOnProjects = new ArrayList<>();
+
+        if (!worksOnProjects.contains(project)) {
+            worksOnProjects.add(project);
+            project.addDeveloper(this);
+        }
+    }
+
 
     @Override
     public boolean equals(Object o) {

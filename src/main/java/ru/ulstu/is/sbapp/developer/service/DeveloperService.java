@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import ru.ulstu.is.sbapp.developer.model.Developer;
+import ru.ulstu.is.sbapp.developer.model.Project;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
@@ -38,6 +39,13 @@ public class DeveloperService {
     @Transactional(readOnly = true)
     public List<Developer> findAllDevelopers() {
         return em.createQuery("select d from Developer d", Developer.class).getResultList();
+    }
+
+    @Transactional
+    public Developer setProject(Long id, List<Project> projects) {
+        final Developer currentDeveloper = findDeveloper(id);
+        currentDeveloper.setWorksOnProjects(projects);
+        return em.merge(currentDeveloper);
     }
 
     @Transactional

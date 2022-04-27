@@ -14,16 +14,38 @@ public class Project {
     private String projectName;
     private String projectDifficulty;
 
-/*    @OneToMany
-    @JoinTable(name = "developers_in_projects",
-            joinColumns = @JoinColumn(name = "group_fk"),
-            inverseJoinColumns = @JoinColumn(name = "developer_fk"))
-    private List<Developer> developers = new ArrayList<>();
-*/
+    /*    @OneToMany
+        @JoinTable(name = "developers_in_projects",
+                joinColumns = @JoinColumn(name = "group_fk"),
+                inverseJoinColumns = @JoinColumn(name = "developer_fk"))
+        private List<Developer> developers = new ArrayList<>();
+    */
     @ManyToMany(mappedBy = "worksOnProjects")
     private List<Developer> developedByDevelopers = new ArrayList<>();
 
+
     public Project() {
+    }
+
+    public Project(String projectName, String projectDifficulty) {
+        this.projectName = projectName;
+        this.projectDifficulty = projectDifficulty;
+    }
+
+    public Project(String projectName, String projectDifficulty, List<Developer> developedByDevelopers) {
+        this.projectName = projectName;
+        this.projectDifficulty = projectDifficulty;
+        this.developedByDevelopers = developedByDevelopers;
+    }
+
+    public void setDeveloper(Developer developer) {
+        if (this.developedByDevelopers == null)
+            this.developedByDevelopers = new ArrayList<>();
+
+        if (!developedByDevelopers.contains(developer)) {
+            developedByDevelopers.add(developer);
+            developer.addProject(this);
+        }
     }
 
     public List<Developer> getDevelopedByDevelopers() {
@@ -34,17 +56,22 @@ public class Project {
         this.developedByDevelopers = developedByDevelopers;
     }
 
+    public void addDeveloper(Developer developer) {
+        if(this.developedByDevelopers == null)
+            this.developedByDevelopers = new ArrayList<>();
+
+        if (!developedByDevelopers.contains(developer)) {
+            developedByDevelopers.add(developer);
+            developer.setProject(this);
+        }
+    }
+
     public List<Developer> getDevelopers() {
         return this.developedByDevelopers;
     }
 
     public void setDevelopers(List<Developer> developers) {
         this.developedByDevelopers = developers;
-    }
-
-    public Project(String projectName, String projectDifficulty) {
-        this.projectName = projectName;
-        this.projectDifficulty = projectDifficulty;
     }
 
     public Long getId() {

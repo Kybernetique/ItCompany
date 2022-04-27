@@ -27,6 +27,14 @@ public class CompanyService {
         return company;
     }
 
+    @Transactional
+    public Company setDeveloper(Long id, Developer developer){
+        final Company currentCompany = findCompany(id);
+        currentCompany.setDeveloper(developer);
+        return em.merge(currentCompany);
+    }
+
+
     @Transactional(readOnly = true)
     public Company findCompany(Long id) {
         final Company company = em.find(Company.class, id);

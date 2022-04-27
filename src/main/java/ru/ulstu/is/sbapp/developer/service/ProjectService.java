@@ -3,6 +3,7 @@ package ru.ulstu.is.sbapp.developer.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import ru.ulstu.is.sbapp.developer.model.Developer;
 import ru.ulstu.is.sbapp.developer.model.Project;
 
 import javax.persistence.EntityManager;
@@ -61,9 +62,14 @@ public class ProjectService
         return currentProject;
     }
 
+    public Project setDeveloper(Long id, List<Developer> developers) {
+        final Project currentProject = findProject(id);
+        currentProject.setDevelopedByDevelopers(developers);
+        return em.merge(currentProject);
+    }
+
     @Transactional
     public void deleteAllProjects() {
-        em.createQuery("delete from Developer").executeUpdate();
         em.createQuery("delete from Project").executeUpdate();
     }
 }

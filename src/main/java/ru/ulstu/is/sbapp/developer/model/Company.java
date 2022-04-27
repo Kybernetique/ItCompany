@@ -62,6 +62,23 @@ public class Company {
         this.companyCountry = companyCountry;
     }
 
+    public List<Developer> getDevelopers(){
+        return developers;
+    }
+
+
+    public void setDeveloper(Developer developer){
+        if(!developers.contains(developer))
+        {
+            developers.add(developer);
+            if(developer.getCompany() != this)
+            {
+                developer.setCompany(this);
+            }
+        }
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
