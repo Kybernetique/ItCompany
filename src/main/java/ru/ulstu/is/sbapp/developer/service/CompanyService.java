@@ -50,6 +50,13 @@ public class CompanyService {
     }
 
     @Transactional
+    public int developersCount(Long id) {
+        final Company currentOwner = findCompany(id);
+        return currentOwner.developersCount();
+    }
+
+
+    @Transactional
     public Company updateCompany(Long id, String companyName, String companyCountry) {
         if (!StringUtils.hasText(companyName) || !StringUtils.hasText(companyCountry)) {
             throw new IllegalArgumentException("Company name is null or empty");

@@ -19,13 +19,6 @@ public class Company {
     @JoinColumn(name = "company_fk")
     private List<Developer> developers = new ArrayList<>();
 
-
-/*    @ManyToMany
-    @JoinTable(name = "joined_company_project",
-            joinColumns = @JoinColumn(name = "company_fk"),
-            inverseJoinColumns = @JoinColumn(name = "project_fk"))
-    private List<Project> worksOnProjects = new ArrayList<>();*/
-
     public Company() {
     }
 
@@ -76,6 +69,10 @@ public class Company {
                 developer.setCompany(this);
             }
         }
+    }
+
+    public int developersCount() {
+        return developers.size();
     }
 
 

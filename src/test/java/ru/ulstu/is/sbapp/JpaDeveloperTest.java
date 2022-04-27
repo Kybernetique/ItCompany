@@ -32,6 +32,8 @@ class JpaDeveloperTest {
     // One-To-Many
     @Test
     void testDeveloperCreate() {
+        log.info("testDeveloperCreate");
+
         companyService.deleteAllCompanies();
         developerService.deleteAllDevelopers();
         projectService.deleteAllProjects();
@@ -43,24 +45,18 @@ class JpaDeveloperTest {
         Developer developer1 = developerService.addDeveloper("Jane", "Doe");
         Developer developer2 = developerService.addDeveloper("John", "Roe");
         Developer developer3 = developerService.addDeveloper("Jane", "Roe");
-        List<Developer> developers = developerService.findAllDevelopers();
 
         // One-To-Many
         companyService.setDeveloper(company0.getId(), developer0);
-        companyService.setDeveloper(company0.getId(), developer1);
+        companyService.setDeveloper(company1.getId(), developer1);
         companyService.setDeveloper(company1.getId(), developer2);
         companyService.setDeveloper(company1.getId(), developer3);
 
         Project project0 = projectService.addProject("Java Virtual Machine", "Very Hard");
         Project project1 = projectService.addProject("Python Interpreter", "Medium");
-        Project project2 = projectService.addProject("Speech Recognizer", "Hard");
-        Project project3 = projectService.addProject("C++ Compiler", "Hardcore");
-        List<Project> projects = projectService.findAllProjects();
 
         // Many-To-Many
-        developerService.setProject(developer0.getId(), projects.subList(0, 1));
-        developerService.setProject(developer0.getId(), projects.subList(2, 3));
-        projectService.setDeveloper(project2.getId(), developers.subList(0, 1));
+
 
         var developerFind1 = developerService.findDeveloper(developer1.getId());
         log.info(developer1.toString());
@@ -77,16 +73,24 @@ class JpaDeveloperTest {
         log.info(companyFind1.toString());
         Assertions.assertEquals(company1, companyFind1);
 
-        var projectFind1 = projectService.findProject(project1.getId());
+        log.info("Developers in COMPANY0: " + companyService.developersCount(company0.getId()));
+        log.info("Developers in COMPANY1: " + companyService.developersCount(company0.getId()));
+
+/*        log.info("DEVELOPER0 in company: " + developerService.findDeveloper(developer0.getId()).getCompany().getCompanyName() + " " + developerService.findDeveloper(developer0.getId()).getCompany().getCompanyCountry() + ". DEVELOPER0's project is: " + developerService.findDeveloper(developer0.getId()).getWorksOnProjects());
+        log.info("DEVELOPER1 in company: " + developerService.findDeveloper(developer1.getId()).getCompany().getCompanyName() + " " + developerService.findDeveloper(developer1.getId()).getCompany().getCompanyCountry() + ". DEVELOPER1's project is" + developerService.findDeveloper(developer1.getId()).getWorksOnProjects());
+        log.info("DEVELOPER2 in company: " + developerService.findDeveloper(developer2.getId()).getCompany().getCompanyName() + " " + developerService.findDeveloper(developer2.getId()).getCompany().getCompanyCountry() + ". DEVELOPER2's project is" + developerService.findDeveloper(developer2.getId()).getWorksOnProjects());
+        log.info("DEVELOPER3 in company: " + developerService.findDeveloper(developer3.getId()).getCompany().getCompanyName() + " " + developerService.findDeveloper(developer3.getId()).getCompany().getCompanyCountry() + ". DEVELOPER3's project is" + developerService.findDeveloper(developer3.getId()).getWorksOnProjects());*/
+
+
+/*        var projectFind1 = projectService.findProject(project1.getId());
         log.info(project1.toString());
         log.info(projectFind1.toString());
-        Assertions.assertEquals(project1, projectFind1);
+        Assertions.assertEquals(project1, projectFind1);*/
 
-        log.info(project0.toString());
+/*        log.info(project0.toString());
         log.info(project1.toString());
-        log.info(project2.toString());
-        log.info(project3.toString());
-        Assertions.assertEquals(projectService.findAllProjects().size(), 4);
+        Assertions.assertEquals(projectService.findAllProjects().size(), 4);*/
+
     }
 
 /*    // Many-To-Many

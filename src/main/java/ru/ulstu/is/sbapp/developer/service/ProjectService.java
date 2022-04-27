@@ -18,6 +18,28 @@ public class ProjectService
     private EntityManager em;
 
     @Transactional
+    public Project addDeveloper(Long id, Developer developer) {
+        final Project project = em.find(Project.class, id);
+        if (project == null) {
+            throw new EntityNotFoundException(String.format("Project with id [%s] is not found", id));
+        }
+
+        project.addDeveloper(developer);
+        return em.merge(project);
+    }
+
+    @Transactional
+    public Project addDevelopers(Long id, List<Developer> developers) {
+        final Project project = em.find(Project.class, id);
+        if (project == null) {
+            throw new EntityNotFoundException(String.format("Project with id [%s] is not found", id));
+        }
+
+        project.addDevelopers(developers);
+        return em.merge(project);
+    }
+
+    @Transactional
     public Project addProject(String projectName, String projectDifficulty) {
         if (!StringUtils.hasText(projectName) || !StringUtils.hasText(projectDifficulty)) {
             throw new IllegalArgumentException("Project name is null or empty");

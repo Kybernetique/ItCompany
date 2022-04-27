@@ -66,6 +66,15 @@ public class Project {
         }
     }
 
+    public void addDevelopers(List<Developer> developers) {
+        if(this.developedByDevelopers == null)
+            this.developedByDevelopers = new ArrayList<>();
+
+        for(Developer dev: developers)
+            addDeveloper(dev);
+    }
+
+
     public List<Developer> getDevelopers() {
         return this.developedByDevelopers;
     }

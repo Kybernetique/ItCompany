@@ -26,12 +26,6 @@ public class Developer {
             inverseJoinColumns = @JoinColumn(name = "project_id"))
     List<Project> worksOnProjects;
 
-/*    @ManyToMany
-    @JoinTable(name = "joined_developer_project",
-     joinColumns = @JoinColumn(name = "developer_fk"),
-      inverseJoinColumns = @JoinColumn(name = "project_fk"))
-    private List<Project> worksOnProjects = new ArrayList<>();*/
-
     public Developer() {
     }
 
