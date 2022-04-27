@@ -15,9 +15,22 @@ public class Developer {
     private String firstName;
     private String lastName;
 
+    @ManyToOne()
+    @JoinColumn(name = "company_fk")
+    private Company company;
+
     @ManyToMany
-    @JoinTable(name = "joined_developer_project", joinColumns = @JoinColumn(name = "developer_fk"), inverseJoinColumns = @JoinColumn(name = "project_fk"))
-    private List<Project> worksOnProjects = new ArrayList<>();
+    @JoinTable(
+            name = "developed_projects",
+            joinColumns = @JoinColumn(name = "developer_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id"))
+    List<Project> worksOnProjects;
+
+/*    @ManyToMany
+    @JoinTable(name = "joined_developer_project",
+     joinColumns = @JoinColumn(name = "developer_fk"),
+      inverseJoinColumns = @JoinColumn(name = "project_fk"))
+    private List<Project> worksOnProjects = new ArrayList<>();*/
 
     public Developer() {
     }

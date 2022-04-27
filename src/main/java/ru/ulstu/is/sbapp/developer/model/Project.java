@@ -14,19 +14,19 @@ public class Project {
     private String projectName;
     private String projectDifficulty;
 
-    @OneToMany
+/*    @OneToMany
     @JoinTable(name = "developers_in_projects",
             joinColumns = @JoinColumn(name = "group_fk"),
             inverseJoinColumns = @JoinColumn(name = "developer_fk"))
     private List<Developer> developers = new ArrayList<>();
-
+*/
     @ManyToMany(mappedBy = "worksOnProjects")
-    private List<Company> developedByDevelopers = new ArrayList<>();
+    private List<Developer> developedByDevelopers = new ArrayList<>();
 
     public Project() {
     }
 
-    public List<Company> getDevelopedByDevelopers() {
+    public List<Developer> getDevelopedByDevelopers() {
         return this.developedByDevelopers;
     }
 
@@ -35,11 +35,11 @@ public class Project {
     }
 
     public List<Developer> getDevelopers() {
-        return this.developers;
+        return this.developedByDevelopers;
     }
 
     public void setDevelopers(List<Developer> developers) {
-        this.developers = developers;
+        this.developedByDevelopers = developers;
     }
 
     public Project(String projectName, String projectDifficulty) {
