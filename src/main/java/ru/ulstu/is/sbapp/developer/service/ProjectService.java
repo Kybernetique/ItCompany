@@ -24,7 +24,7 @@ public class ProjectService
             throw new EntityNotFoundException(String.format("Project with id [%s] is not found", id));
         }
 
-        project.addDeveloper(developer);
+        project.setDeveloper(developer);
         return em.merge(project);
     }
 
@@ -35,7 +35,7 @@ public class ProjectService
             throw new EntityNotFoundException(String.format("Project with id [%s] is not found", id));
         }
 
-        project.addDevelopers(developers);
+        project.setDevelopedByDevelopers(developers);
         return em.merge(project);
     }
 
@@ -57,6 +57,7 @@ public class ProjectService
         }
         return project;
     }
+
 
     @Transactional(readOnly = true)
     public List<Project> findAllProjects() {
@@ -82,12 +83,6 @@ public class ProjectService
         em.persist(currentProject);
         em.remove(currentProject);
         return currentProject;
-    }
-
-    public Project setDeveloper(Long id, List<Developer> developers) {
-        final Project currentProject = findProject(id);
-        currentProject.setDevelopedByDevelopers(developers);
-        return em.merge(currentProject);
     }
 
     @Transactional

@@ -1,5 +1,8 @@
 package ru.ulstu.is.sbapp.developer.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +23,13 @@ public class Project {
                 inverseJoinColumns = @JoinColumn(name = "developer_fk"))
         private List<Developer> developers = new ArrayList<>();
     */
-    @ManyToMany(mappedBy = "worksOnProjects")
-    private List<Developer> developedByDevelopers = new ArrayList<>();
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "projects_developers",
+            joinColumns = @JoinColumn(name = "project_fk"),
+            inverseJoinColumns = @JoinColumn(name = "developer_fk"))
+    private List<Developer> developedByDevelopers;
+
 
 
     public Project() {
@@ -53,35 +61,17 @@ public class Project {
     }
 
     public void setDevelopedByDevelopers(List<Developer> developers) {
-        this.developedByDevelopers = developedByDevelopers;
-    }
-
-    public void addDeveloper(Developer developer) {
-        if(this.developedByDevelopers == null)
-            this.developedByDevelopers = new ArrayList<>();
-
-        if (!developedByDevelopers.contains(developer)) {
-            developedByDevelopers.add(developer);
-            developer.setProject(this);
-        }
-    }
-
-    public void addDevelopers(List<Developer> developers) {
         if(this.developedByDevelopers == null)
             this.developedByDevelopers = new ArrayList<>();
 
         for(Developer dev: developers)
-            addDeveloper(dev);
+            setDeveloper(dev);
     }
-
 
     public List<Developer> getDevelopers() {
         return this.developedByDevelopers;
     }
 
-    public void setDevelopers(List<Developer> developers) {
-        this.developedByDevelopers = developers;
-    }
 
     public Long getId() {
         return id;

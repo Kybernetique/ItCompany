@@ -1,5 +1,8 @@
 package ru.ulstu.is.sbapp.developer.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +22,10 @@ public class Developer {
     @JoinColumn(name = "company_fk")
     private Company company;
 
-    @ManyToMany
-    @JoinTable(
-            name = "developed_projects",
-            joinColumns = @JoinColumn(name = "developer_id"),
-            inverseJoinColumns = @JoinColumn(name = "project_id"))
-    List<Project> worksOnProjects;
+    @ManyToMany(mappedBy = "developedByDevelopers")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Project> worksOnProjects;
+
 
     public Developer() {
     }
@@ -97,7 +98,7 @@ public class Developer {
 
         if (!worksOnProjects.contains(project)) {
             worksOnProjects.add(project);
-            project.addDeveloper(this);
+            project.setDeveloper(this);
         }
     }
 

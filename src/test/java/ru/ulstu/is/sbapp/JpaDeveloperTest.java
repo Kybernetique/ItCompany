@@ -45,6 +45,7 @@ class JpaDeveloperTest {
         Developer developer1 = developerService.addDeveloper("Jane", "Doe");
         Developer developer2 = developerService.addDeveloper("John", "Roe");
         Developer developer3 = developerService.addDeveloper("Jane", "Roe");
+        List<Developer> developers = developerService.findAllDevelopers();
 
         // One-To-Many
         companyService.setDeveloper(company0.getId(), developer0);
@@ -54,9 +55,11 @@ class JpaDeveloperTest {
 
         Project project0 = projectService.addProject("Java Virtual Machine", "Very Hard");
         Project project1 = projectService.addProject("Python Interpreter", "Medium");
+        List<Project> projects = projectService.findAllProjects();
 
         // Many-To-Many
-
+        project0.setDevelopedByDevelopers(developers);
+        project1.setDeveloper(developer3);
 
         var developerFind1 = developerService.findDeveloper(developer1.getId());
         log.info(developer1.toString());
@@ -82,51 +85,9 @@ class JpaDeveloperTest {
         log.info("DEVELOPER3 in company: " + developerService.findDeveloper(developer3.getId()).getCompany().getCompanyName() + " " + developerService.findDeveloper(developer3.getId()).getCompany().getCompanyCountry() + ". DEVELOPER3's project is" + developerService.findDeveloper(developer3.getId()).getWorksOnProjects());*/
 
 
-/*        var projectFind1 = projectService.findProject(project1.getId());
-        log.info(project1.toString());
-        log.info(projectFind1.toString());
-        Assertions.assertEquals(project1, projectFind1);*/
-
-/*        log.info(project0.toString());
-        log.info(project1.toString());
-        Assertions.assertEquals(projectService.findAllProjects().size(), 4);*/
+/
 
     }
-
-/*    // Many-To-Many
-    @Test
-    void testProjectCreate() {
-        companyService.deleteAllCompanies();
-        developerService.deleteAllDevelopers();
-        projectService.deleteAllProjects();
-
-        Project project0 = projectService.addProject("Java Virtual Machine", "Very Hard");
-        Project project1 = projectService.addProject("Python Interpreter", "Medium");
-        Project project2 = projectService.addProject("Speech Recognizer", "Hard");
-        Project project3 = projectService.addProject("C++ Compiler", "Hardcore");
-        List<Project> projects = projectService.findAllProjects();
-
-        Developer developer0 = developerService.addDeveloper("John", "Doe");
-        Developer developer1 = developerService.addDeveloper("Jane", "Doe");
-        Developer developer2 = developerService.addDeveloper("John", "Roe");
-        Developer developer3 = developerService.addDeveloper("Jane", "Roe");
-        List<Developer> developers = developerService.findAllDevelopers();
-
-        Company company0 = companyService.addCompany("Sun Microsystems", "USA");
-        Company company1 = companyService.addCompany("Bell Labs", "USA");
-
-        developerService.setProject(developer0.getId(), project0);
-        developerService.setProject(developer1.getId(), project1);
-        developerService.setProject(developer2.getId(), project2);
-        developerService.setProject(developer3.getId(), project3);
-
-        log.info(project0.toString());
-        log.info(project1.toString());
-        log.info(project2.toString());
-        log.info(project3.toString());
-        Assertions.assertEquals(projects.size(), 4);
-
-    }*/
 
     @Test
     void testDeveloperRead() {
