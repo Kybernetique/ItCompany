@@ -60,6 +60,8 @@ class JpaDeveloperTest {
         // Many-To-Many
         project0.setDevelopedByDevelopers(developers);
         project1.setDeveloper(developer3);
+        developer2.setWorksOnProjects(projects);
+        developer1.setProject(project1);
 
         var developerFind1 = developerService.findDeveloper(developer1.getId());
         log.info(developer1.toString());
@@ -77,16 +79,18 @@ class JpaDeveloperTest {
         Assertions.assertEquals(company1, companyFind1);
 
         log.info("Developers in COMPANY0: " + companyService.developersCount(company0.getId()));
-        log.info("Developers in COMPANY1: " + companyService.developersCount(company0.getId()));
+        log.info("Developers in COMPANY1: " + companyService.developersCount(company1.getId()));
 
-/*        log.info("DEVELOPER0 in company: " + developerService.findDeveloper(developer0.getId()).getCompany().getCompanyName() + " " + developerService.findDeveloper(developer0.getId()).getCompany().getCompanyCountry() + ". DEVELOPER0's project is: " + developerService.findDeveloper(developer0.getId()).getWorksOnProjects());
-        log.info("DEVELOPER1 in company: " + developerService.findDeveloper(developer1.getId()).getCompany().getCompanyName() + " " + developerService.findDeveloper(developer1.getId()).getCompany().getCompanyCountry() + ". DEVELOPER1's project is" + developerService.findDeveloper(developer1.getId()).getWorksOnProjects());
-        log.info("DEVELOPER2 in company: " + developerService.findDeveloper(developer2.getId()).getCompany().getCompanyName() + " " + developerService.findDeveloper(developer2.getId()).getCompany().getCompanyCountry() + ". DEVELOPER2's project is" + developerService.findDeveloper(developer2.getId()).getWorksOnProjects());
-        log.info("DEVELOPER3 in company: " + developerService.findDeveloper(developer3.getId()).getCompany().getCompanyName() + " " + developerService.findDeveloper(developer3.getId()).getCompany().getCompanyCountry() + ". DEVELOPER3's project is" + developerService.findDeveloper(developer3.getId()).getWorksOnProjects());*/
+        log.info(project0.toString());
+        log.info(project1.toString());
 
+        log.info(developer0.toString());
+        log.info(developer1.toString());
+        log.info(developer2.toString());
+        log.info(developer3.toString());
 
-/
-
+        Assertions.assertEquals(projects.size(), 2);
+        Assertions.assertEquals(developers.size(), 4);
     }
 
     @Test

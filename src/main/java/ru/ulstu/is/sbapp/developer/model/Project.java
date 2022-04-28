@@ -17,18 +17,12 @@ public class Project {
     private String projectName;
     private String projectDifficulty;
 
-    /*    @OneToMany
-        @JoinTable(name = "developers_in_projects",
-                joinColumns = @JoinColumn(name = "group_fk"),
-                inverseJoinColumns = @JoinColumn(name = "developer_fk"))
-        private List<Developer> developers = new ArrayList<>();
-    */
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "projects_developers",
             joinColumns = @JoinColumn(name = "project_fk"),
             inverseJoinColumns = @JoinColumn(name = "developer_fk"))
-    private List<Developer> developedByDevelopers;
+    private List<Developer> developedByDevelopers = new ArrayList<>();
 
 
 
@@ -54,6 +48,10 @@ public class Project {
             developedByDevelopers.add(developer);
             developer.addProject(this);
         }
+    }
+
+    public int developersCount() {
+        return developedByDevelopers.size();
     }
 
     public List<Developer> getDevelopedByDevelopers() {

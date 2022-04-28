@@ -37,8 +37,6 @@ public class Company {
         return id;
     }
 
-
-
     public String getCompanyName() {
         return companyName;
     }
@@ -55,17 +53,15 @@ public class Company {
         this.companyCountry = companyCountry;
     }
 
-    public List<Developer> getDevelopers(){
+    public List<Developer> getDevelopers() {
         return developers;
     }
 
 
-    public void setDeveloper(Developer developer){
-        if(!developers.contains(developer))
-        {
+    public void setDeveloper(Developer developer) {
+        if (!developers.contains(developer)) {
             developers.add(developer);
-            if(developer.getCompany() != this)
-            {
+            if (developer.getCompany() != this) {
                 developer.setCompany(this);
             }
         }

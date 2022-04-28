@@ -24,12 +24,15 @@ public class Developer {
 
     @ManyToMany(mappedBy = "developedByDevelopers")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Project> worksOnProjects;
+    private List<Project> worksOnProjects = new ArrayList<>();
 
 
     public Developer() {
     }
 
+    public int projectsCount() {
+        return worksOnProjects.size();
+    }
 
     public List<Project> getWorksOnProjects() {
         return worksOnProjects;

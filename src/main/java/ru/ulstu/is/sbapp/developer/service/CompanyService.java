@@ -51,8 +51,8 @@ public class CompanyService {
 
     @Transactional
     public int developersCount(Long id) {
-        final Company currentOwner = findCompany(id);
-        return currentOwner.developersCount();
+        final Company currentCompany = findCompany(id);
+        return currentCompany.developersCount();
     }
 
 

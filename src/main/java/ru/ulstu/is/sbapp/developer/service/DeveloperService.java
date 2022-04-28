@@ -3,6 +3,7 @@ package ru.ulstu.is.sbapp.developer.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import ru.ulstu.is.sbapp.developer.model.Company;
 import ru.ulstu.is.sbapp.developer.model.Developer;
 import ru.ulstu.is.sbapp.developer.model.Project;
 
@@ -46,6 +47,21 @@ public class DeveloperService {
         final Developer currentDeveloper = findDeveloper(id);
         currentDeveloper.setWorksOnProjects(projects);
         return em.merge(currentDeveloper);
+    }
+
+    @Transactional(readOnly = true)
+    public Project findProject(Long id) {
+        final Project project = em.find(Project.class, id);
+        if (project == null) {
+            throw new EntityNotFoundException(String.format("Project with id [%s] is not found", id));
+        }
+        return project;
+    }
+
+    @Transactional
+    public int projectsCount(Long id) {
+        final Developer currentDeveloper = findDeveloper(id);
+        return currentDeveloper.projectsCount();
     }
 
     @Transactional

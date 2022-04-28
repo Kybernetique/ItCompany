@@ -66,6 +66,12 @@ public class ProjectService
     }
 
     @Transactional
+    public int developersCount(Long id) {
+        final Project currentProject = findProject(id);
+        return currentProject.developersCount();
+    }
+
+    @Transactional
     public Project updateProject(Long id, String projectName, String projectDifficulty) {
         if (!StringUtils.hasText(projectName) || !StringUtils.hasText(projectDifficulty)) {
             throw new IllegalArgumentException("Project name is null or empty");
