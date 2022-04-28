@@ -3,7 +3,6 @@ package ru.ulstu.is.sbapp.developer.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import ru.ulstu.is.sbapp.developer.model.Company;
 import ru.ulstu.is.sbapp.developer.model.Developer;
 import ru.ulstu.is.sbapp.developer.model.Project;
 
@@ -45,7 +44,7 @@ public class DeveloperService {
     @Transactional
     public Developer setProject(Long id, List<Project> projects) {
         final Developer currentDeveloper = findDeveloper(id);
-        currentDeveloper.setWorksOnProjects(projects);
+        currentDeveloper.setProjects(projects);
         return em.merge(currentDeveloper);
     }
 

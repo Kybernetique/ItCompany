@@ -29,7 +29,6 @@ class JpaDeveloperTest {
     @Autowired
     ProjectService projectService;
 
-    // One-To-Many
     @Test
     void testDeveloperCreate() {
         log.info("testDeveloperCreate");
@@ -58,9 +57,9 @@ class JpaDeveloperTest {
         List<Project> projects = projectService.findAllProjects();
 
         // Many-To-Many
-        project0.setDevelopedByDevelopers(developers);
+        project0.setDevelopers(developers);
         project1.setDeveloper(developer3);
-        developer2.setWorksOnProjects(projects);
+        developer2.setProjects(projects);
         developer1.setProject(project1);
 
         var developerFind1 = developerService.findDeveloper(developer1.getId());

@@ -12,8 +12,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Service
-public class ProjectService
-{
+public class ProjectService {
     @PersistenceContext
     private EntityManager em;
 
@@ -35,7 +34,7 @@ public class ProjectService
             throw new EntityNotFoundException(String.format("Project with id [%s] is not found", id));
         }
 
-        project.setDevelopedByDevelopers(developers);
+        project.setDevelopers(developers);
         return em.merge(project);
     }
 

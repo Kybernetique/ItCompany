@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class CompanyService {
     @PersistenceContext
-    private EntityManager em ;
+    private EntityManager em;
 
 
     @Transactional
@@ -28,7 +28,7 @@ public class CompanyService {
     }
 
     @Transactional
-    public Company setDeveloper(Long id, Developer developer){
+    public Company setDeveloper(Long id, Developer developer) {
         final Company currentCompany = findCompany(id);
         currentCompany.setDeveloper(developer);
         return em.merge(currentCompany);

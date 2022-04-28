@@ -22,24 +22,24 @@ public class Developer {
     @JoinColumn(name = "company_fk")
     private Company company;
 
-    @ManyToMany(mappedBy = "developedByDevelopers")
+    @ManyToMany(mappedBy = "developers")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Project> worksOnProjects = new ArrayList<>();
+    private List<Project> projects = new ArrayList<>();
 
 
     public Developer() {
     }
 
     public int projectsCount() {
-        return worksOnProjects.size();
+        return projects.size();
     }
 
-    public List<Project> getWorksOnProjects() {
-        return worksOnProjects;
+    public List<Project> getProjects() {
+        return projects;
     }
 
-    public List<Project> setWorksOnProjects(List<Project> worksOnProjects) {
-        return this.worksOnProjects = worksOnProjects;
+    public List<Project> setProjects(List<Project> worksOnProjects) {
+        return this.projects = worksOnProjects;
     }
 
 
@@ -48,18 +48,18 @@ public class Developer {
         this.lastName = lastName;
     }
 
-    public Developer(String firstName, String lastName, List<Project> worksOnProjects) {
+    public Developer(String firstName, String lastName, List<Project> projects) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.worksOnProjects = worksOnProjects;
+        this.projects = projects;
     }
 
     public void addProject(Project project) {
-        if(this.worksOnProjects == null)
-            this.worksOnProjects = new ArrayList<>();
+        if (this.projects == null)
+            this.projects = new ArrayList<>();
 
-        if (!worksOnProjects.contains(project)) {
-            worksOnProjects.add(project);
+        if (!projects.contains(project)) {
+            projects.add(project);
             project.setDeveloper(this);
         }
     }
@@ -96,11 +96,11 @@ public class Developer {
     }
 
     public void setProject(Project project) {
-        if (this.worksOnProjects == null)
-            this.worksOnProjects = new ArrayList<>();
+        if (this.projects == null)
+            this.projects = new ArrayList<>();
 
-        if (!worksOnProjects.contains(project)) {
-            worksOnProjects.add(project);
+        if (!projects.contains(project)) {
+            projects.add(project);
             project.setDeveloper(this);
         }
     }

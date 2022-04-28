@@ -22,8 +22,7 @@ public class Project {
     @JoinTable(name = "projects_developers",
             joinColumns = @JoinColumn(name = "project_fk"),
             inverseJoinColumns = @JoinColumn(name = "developer_fk"))
-    private List<Developer> developedByDevelopers = new ArrayList<>();
-
+    private List<Developer> developers = new ArrayList<>();
 
 
     public Project() {
@@ -34,40 +33,36 @@ public class Project {
         this.projectDifficulty = projectDifficulty;
     }
 
-    public Project(String projectName, String projectDifficulty, List<Developer> developedByDevelopers) {
+    public Project(String projectName, String projectDifficulty, List<Developer> developers) {
         this.projectName = projectName;
         this.projectDifficulty = projectDifficulty;
-        this.developedByDevelopers = developedByDevelopers;
+        this.developers = developers;
     }
 
     public void setDeveloper(Developer developer) {
-        if (this.developedByDevelopers == null)
-            this.developedByDevelopers = new ArrayList<>();
+        if (this.developers == null)
+            this.developers = new ArrayList<>();
 
-        if (!developedByDevelopers.contains(developer)) {
-            developedByDevelopers.add(developer);
+        if (!developers.contains(developer)) {
+            developers.add(developer);
             developer.addProject(this);
         }
     }
 
     public int developersCount() {
-        return developedByDevelopers.size();
-    }
-
-    public List<Developer> getDevelopedByDevelopers() {
-        return this.developedByDevelopers;
-    }
-
-    public void setDevelopedByDevelopers(List<Developer> developers) {
-        if(this.developedByDevelopers == null)
-            this.developedByDevelopers = new ArrayList<>();
-
-        for(Developer dev: developers)
-            setDeveloper(dev);
+        return developers.size();
     }
 
     public List<Developer> getDevelopers() {
-        return this.developedByDevelopers;
+        return this.developers;
+    }
+
+    public void setDevelopers(List<Developer> developers) {
+        if (this.developers == null)
+            this.developers = new ArrayList<>();
+
+        for (Developer dev : developers)
+            setDeveloper(dev);
     }
 
 
