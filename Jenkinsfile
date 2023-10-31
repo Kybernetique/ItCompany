@@ -16,16 +16,11 @@ pipeline {
                 echo 'Testing executed successfully!'
             }
         }
-        stage('Login dockerhub') {
-            steps {
-                echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME -p ${DOCKER_PASSWORD}
-            }
-        }
         stage('Build image') {
             steps {          
-                echo 'Deploy has been started...'
-                sh "docker build -t kybernetique/web-project ."
-                echo 'Deploy executed successfully!'
+                echo 'Building of an image has been started...'
+                docker.build("kybernetique/web-project .")
+                echo 'Building of an image executed successfully!'
             }
         }
     }
