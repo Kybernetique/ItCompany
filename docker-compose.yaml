@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  web-project:
+    build: .
+    volumes:
+      - .:/opt/web
+    ports:
+      - "8090:8080"
