@@ -16,7 +16,7 @@ pipeline {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
-        stage('Push to Dockerhub') {
+        stage('Push Dockerhub') {
             steps{
                 sh "docker push kybernetique/web-project:latest"
             }

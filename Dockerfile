@@ -6,6 +6,7 @@ COPY . /opt/web
 
 EXPOSE 8080
 
-RUN ["sh", "gradlew", "test"]
+CMD ["sh", "gradlew", "test"]
 
-CMD ["sh", "gradlew", "bootRun"]
+#RUN ["sh", "gradlew", "test"]
+# CMD ["sh", "gradlew", "bootRun"]
