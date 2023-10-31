@@ -16,14 +16,15 @@ pipeline {
                 echo 'Testing executed successfully!'
             }
         }
-        stage('Deploy') {
+        stage('Login dockerhub') {
             steps {
-                withCredentials([string(credentialsId: 'e95966e7-3860-4656-a5a4-51313536546b', variable: 'dockerhubpswd')]) {
-                    sh "docker login -u kybernetique -p ${dockerhubpswd}"
-                }
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+        stage('Build image') {
+            steps {          
                 echo 'Deploy has been started...'
                 sh "docker build -t kybernetique/web-project ."
-                sh "docker push kybernetique/web-project:latest"
                 echo 'Deploy executed successfully!'
             }
         }
