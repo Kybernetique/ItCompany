@@ -2,6 +2,7 @@ version: '3'
 
 services:
   web-project:
+    image: kybernetique/web-project:latest
     build: .
     volumes:
       - .:/opt/web
