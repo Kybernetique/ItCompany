@@ -16,5 +16,12 @@ pipeline {
                 echo 'Testing executed successfully!'
             }
         }
+        stage('Deploy') {
+            steps {
+                echo 'Deploy has been started...'
+                sh "docker push kybernetique/web-project:latest"
+                echo 'Deploy executed successfully!'
+            }
+        }
     }
 }
