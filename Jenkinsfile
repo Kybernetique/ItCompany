@@ -19,7 +19,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploy has been started...'
-                sh "chmod 666 /var/run/docker.sock"
+                sh "sudo chmod 666 /var/run/docker.sock"
                 sh "docker build -t kybernetique/web-project ."
                 sh "docker push kybernetique/web-project:latest"
                 echo 'Deploy executed successfully!'
