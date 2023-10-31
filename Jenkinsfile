@@ -7,7 +7,7 @@ pipeline {
         stage('Up Containers') {
             steps {          
                 echo 'Building of an image has been started...'
-                sh "docker-compose up"
+                sh "docker-compose -p kybernetique/web-project up"
                 echo 'Building of an image executed successfully!'
             }
         }
