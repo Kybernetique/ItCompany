@@ -19,7 +19,7 @@ pipeline {
         stage('Build image') {
             steps {          
                 echo 'Building of an image has been started...'
-                docker.build("kybernetique/web-project .")
+                sh "docker build -t kybernetique/web-project ."
                 echo 'Building of an image executed successfully!'
             }
         }
