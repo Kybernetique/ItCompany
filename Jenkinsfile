@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Push Dockerhub') {
             steps{
-                sh "docker push kybernetique/web-project:latest"
+                sh "docker push kybernetique/web-project"
             }
         }
     }
