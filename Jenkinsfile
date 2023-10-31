@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Login dockerhub') {
             steps {
-                sh 'docker login -u kybernetique --password-stdin'
+                sh 'docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}'
             }
         }
         stage('Build image') {
