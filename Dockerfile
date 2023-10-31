@@ -6,6 +6,6 @@ COPY . /opt/web
 
 EXPOSE 8080
 
-RUN ["sh", "gradlew", "build"]
+RUN ["sh", "gradlew", "test"]
 
-CMD ["java", "-jar", "/opt/web/build/libs/sbapp-0.0.1-SNAPSHOT.jar"]
+CMD ["sh", "gradlew", "bootRun"]
