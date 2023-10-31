@@ -19,19 +19,19 @@ pipeline {
                 echo 'Testing executed successfully!'
             }
         }
-        stage('Build image') {
+        stage('Build Image') {
             steps {          
                 echo 'Building of an image has been started...'
                 sh "docker build -t kybernetique/web-project ."
                 echo 'Building of an image executed successfully!'
             }
         }
-        stage('login to dockerhub') {
+        stage('Login Dockerhub') {
             steps {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
-        stage('push image') {
+        stage('Push to Dockerhub') {
             steps{
                 sh "docker push kybernetique/web-project:latest"
             }
