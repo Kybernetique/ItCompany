@@ -1,17 +1,17 @@
 pipeline {
-    agent "main"
+    agent any
     stages {
         stage('Build') {
             steps {
                 echo "Building has been starter..."
-                sh gradlew build
+                ./gradlew build
                 echo "Building executed succesfully!"
             }
         }
         stage('Test') {
             steps {
                 echo "Testing has been starter..."
-                sh gradlew test
+                ./gradlew test
                 echo "Testing executed successfully!"
             }
         }
