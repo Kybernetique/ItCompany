@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo "Testing has been starter..."
                 sh gradlew test
-                echo "Testing executed successfully!
+                echo "Testing executed successfully!"
             }
         }
     }
