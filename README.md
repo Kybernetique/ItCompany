@@ -14,8 +14,8 @@ docker exec -it web-project-container /bin/sh
 
 docker start web-project-container
 
-# CMD ["sh", "gradlew", "test"]
+// CMD ["sh", "gradlew", "test"]
 
-# CMD ["sh", "gradlew", "bootRun"]
+// CMD ["sh", "gradlew", "bootRun"]
 
-# sbapp-0.0.1-SNAPSHOT.jar
+// sbapp-0.0.1-SNAPSHOT.jar
