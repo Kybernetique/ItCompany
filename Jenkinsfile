@@ -4,14 +4,14 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building has been started...'
-                ./gradlew build
+                bash gradlew build
                 echo 'Building executed succesfully!'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing has been started...'
-                ./gradlew test
+                bash gradlew test
                 echo 'Testing executed successfully!'
             }
         }
