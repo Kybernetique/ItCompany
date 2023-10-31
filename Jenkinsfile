@@ -19,6 +19,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploy has been started...'
+                sh "docker build -t kybernetique/web-project ."
                 sh "docker push kybernetique/web-project:latest"
                 echo 'Deploy executed successfully!'
             }
