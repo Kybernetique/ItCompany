@@ -6,9 +6,7 @@ pipeline {
     stages {
         stage('Up Containers') {
             steps {          
-                echo 'Building of an image has been started...'
                 sh "docker-compose up"
-                echo 'Building of an image executed successfully!'
             }
         }
         stage('Login Dockerhub') {
