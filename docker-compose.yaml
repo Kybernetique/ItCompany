@@ -1,10 +1,43 @@
-version: '3'
+version: '3.8'
 
 services:
-  web-project:
-    image: kybernetique/web-project:latest
-    build: .
+  backend-service:
+    container_name: app_container
+    image: kybernetique/it-company:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - .:/opt/web
     ports:
-      - "8090:8080"
+      - "8081:8080"
+    depends_on:
+      - db-service
+
+  db-service:
+    container_name: db_container
+    image: postgres:14.7-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    restart: always
+
+  pgadmin-service:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4:7
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "81:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  db-data:
+  pgadmin-data:
