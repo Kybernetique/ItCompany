@@ -3,7 +3,7 @@ version: '3.8'
 services:
   it-company:
     container_name: it-company
-    image: kybernetique/web-project:latest
+    image: kybernetique/it-company:latest
     build: .
     volumes:
       - .:/opt/web
