@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Push Dockerhub') {
             steps{
-                sh "docker push kybernetique/it-company"
+                sh "docker push kybernetique/it-company-jenkins"
             }
         }
     }

@@ -6,7 +6,6 @@ COPY . /opt/web
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "build/libs/sbapp-0.0.1-SNAPSHOT.jar"]
+#ENTRYPOINT ["java", "-jar", "build/libs/sbapp-0.0.1-SNAPSHOT.jar"]
 
-#RUN ["sh", "gradlew", "test"]
-# CMD ["sh", "gradlew", "bootRun"]
+CMD ["sh", "gradlew", "test"]
