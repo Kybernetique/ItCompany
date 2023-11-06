@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment # Тип ресурса
+metadata:
+  name: it-company
+spec:
+  selector:
+    matchLabels:
+      app: it-company
+  replicas: 3 # Число сервисов, которые будут созданы для развертывания
+  template:
+    metadata:
+      labels:
+        app: it-company
+    spec:
+      containers:
+        - name: it-company
+          image: kybernetique/it-company # Docker-образ, который будет использоваться в кластере
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8081 # Порт, на котором контейнер будет запущен в кластере

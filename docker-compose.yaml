@@ -2,7 +2,6 @@ version: '3.8'
 
 services:
   it-company:
-    container_name: it-company
     image: kybernetique/it-company:latest
     build: .
     volumes:
