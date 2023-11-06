@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   it-company:
-    image: kybernetique/it-company:latest
+    image: kybernetique/it-company-jenkins:latest
     build: .
     volumes:
       - .:/opt/web
